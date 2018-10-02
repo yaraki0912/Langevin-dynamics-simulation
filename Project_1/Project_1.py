@@ -100,7 +100,7 @@ def histogram():
     new_velocity = i_velocity
    # time = 0
     num_took = list()
-    put=[]
+    #put=[]
     for i in range(n):
         if i !=0:
             new_position = new_pos
@@ -114,7 +114,7 @@ def histogram():
             if new_pos >= wall or new_pos <= -wall:
                 num_took.append(j+1)
                 break
-        write_output(put)
+     #   write_output(put)
 
     print(num_took, len(num_took))
 

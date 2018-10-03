@@ -15,88 +15,59 @@ import Lans
 import numpy as np
 import argparse
 import unittest
+import Project_1.Project_1 as project_1
 
-
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
-
-
-def test_command_line_interface():
-    """Test the CLI."""
-    runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'Project_1.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
-
+class Test_Project_1(unittest.TestCase):
+    
     def setUp(self):
         pass
 
     def tearDown(self):
         pass
 
-    def test_read_energy_read(self):
-        '''Tests if the function reads and returns correctly for given input file'''
-        pos, force, energy = Lans.ReadEnergy(r"./tests/testfile.txt")
-        assert (np.isclose(pos, [0.0001, 0.010099, 0.020099, 0.030098])).all()
-        assert (np.isclose(force, [0.010675, 0.010675, 0.010675, 0.012945])).all()
-        assert (np.isclose(energy, [-0.113475, -0.113475, -0.113475, -0.060178])).all()
-
+    
     def test_inputs(self):
-        # Tests if the parser reads correctly and if no inputs are given, uses default values
-        self.parser = Lans.CreateParser()
-        parsed = self.parser.parse_args(
-            ['--initial_velocity', '2.5', '--total_time', '20', '--damping_coeff', '0.1', '--input_file',
-             'C:/Users/hetag/Desktop/input.txt'])
-        self.assertEqual(
-            [parsed.initial_position, parsed.initial_velocity, parsed.time_step, parsed.total_time, parsed.temperature,
-             parsed.damping_coeff, parsed.input_file], [1, 2.5, 0.1, 20, 1, 0.1, 'C:/Users/hetag/Desktop/input.txt'])
+       parse = project_1.input(
+            [
+                '--temperature', '300', \
+                '--total_time', '1000', \
+                '--time_step', '0.1', \
+                '--initial_position', '0', \
+                '--initial_velocity', '0', \
+                '--damping_coefficient', '0.1' , \
+            ]
+        )
 
-    kb = 1
-
-    def test_random(self):
+        self.assertIsInstance(parse, dict)
+        self.assertEqual(parse['temperature'], 300)
+        self.assertEqual(parse['total_time'], 1000)
+        self.assertEqual(parse['time_step'], 0.1)
+        self.assertEqual(parse['initial_position'], 0)
+        self.assertEqual(parse['initial_velocity'], 0)
+        self.assertEqual(parse['damping_coefficient'], 0.1)
+        
+        
+        
+    def test_random_f(self):
         '''Tests if random generator works fine'''
-        self.assertEqual(Lans.Random(1, 0), 0)
+        self.assertEqual(project_1.random_f(1, 0,K_B=1,epsi=1), 0)
 
-    def test_potential_force(self):
-        '''Tests the function producing potential force'''
-        sample_pos = [0, 1, 2, 3, 4, 5]
-        sample_energy = [0, 10, 20, 30, 40, 50]
-        self.assertEqual(Lans.PotentialForce(2.5, sample_pos, sample_energy), 25)
-
-    def test_drag_force(self):
-        self.assertEqual(Lans.DragForce(0.5, 2), -1)
+    def test_drag_f(self):
+        self.assertEqual(project_1.drag_f(0, 2), 0)
 
     def test_euler(self):
         '''Tests if the force, position and velocity calculated are correct'''
-        self.pos = 1
-        self.vel = 1
-        data = [[1, 2, 3, 4], [10, 20, 30, 40]]
-        self.assertEqual(Lans.Euler(self.pos, self.vel, 0, 1, *data, dt=0.5), (-10, -4, -1))
+        self.assertEqual(project_1.euler(0,0,0,0,0), (0,0))
 
     def test_write_output(self):
         '''Tests if the output file is written correctly'''
-        test_string = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
+        test_string = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
         test_string2 = '1 2.0000 3.0000 4.0000 \n'
-        test_string3 = '5 6.0000 7.0000 8.0000 \n'
+        test_string3 = '5 6.0000 7.0000 8.0000 \n' 
         out_file = './tests/test_output.txt'
-        Lans.write_output(out_file, test_string)
-        f = open(out_file, 'r')
-        test_data = list(f.readlines())
-        f.close()
+        project_1.write_output(out_file, test_string)
+        output = open(out_file, 'r')
+        test_data = list(output.readlines())
+        output.close()
         self.assertEqual(test_data[1], test_string2)
         self.assertEqual(test_data[2], test_string3)

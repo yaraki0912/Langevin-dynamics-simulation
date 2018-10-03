@@ -172,7 +172,7 @@ def main():  # pragma: no cover
 if __name__ == '__main__':
     input()
     main()
-    plot(0,0, 0.1, 300,5, 1000,0.1)
+    plot()
 
 """Main module."""
 

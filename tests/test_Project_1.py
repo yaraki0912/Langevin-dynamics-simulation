@@ -4,9 +4,10 @@
 """Tests for `Project_1` package."""
 
 import pytest
-
+#import matplotlib
+#import matplotlib.pyplot as plt
 from click.testing import CliRunner
-
+import Project_1
 from Project_1 import Project_1
 import io
 import os

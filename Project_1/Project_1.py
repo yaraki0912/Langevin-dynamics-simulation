@@ -43,9 +43,7 @@ def euler(time_step,velocity,position, damping_coef, temp):
     a = drag_f(damping_coef, velocity) + random_f(temp, damping_coef,K_B=1,epsi=1)
     new_velocity = velocity + a*time_step
     new_position = position + velocity * time_step
-    #print(new_position)
-    #print("rf", random_f(temp, damping_coef,K_B=1,epsi=1)
-    #print("v,p=", new_velocity,new_position)
+
     return new_velocity, new_position
 
 def write_output(output):
@@ -78,7 +76,7 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
         new_velocity = new_vel
         position.append(new_position)
         Time.append(time)
-        if new_position > wall or new_position < -wall:
+        if new_position > wall or new_position < 0:
             return time, position, Time
 
 

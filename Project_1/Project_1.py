@@ -32,7 +32,7 @@ def input():
 def random_f(temp, damping_coef,K_B=1,epsi=1):
     '''
     This function takes temperature and damping coefficient and kb(default to 1), epsilon(default to 1)
-    and calculate random force
+    and calculates random force
 
     :param temp: temperature
     :param damping_coef: dumping coefficient
@@ -47,7 +47,7 @@ def random_f(temp, damping_coef,K_B=1,epsi=1):
 
 def drag_f(damping_coef,i_velocity):
     '''
-    This function takes damping coefficient and velocity
+    This function takes damping coefficient from user input and velocity and calculates drag force
     :param damping_coef: damping coefficient from user input
     :param i_velocity: velocity at time t
     :return: drag force
@@ -56,8 +56,19 @@ def drag_f(damping_coef,i_velocity):
     drag_force = -damping_coef * i_velocity
     return drag_force
 
-def euler(time_step,velocity,position, damping_coef, temp):
+def euler(time_step,velocity,position,damping_coef,temp):
+    '''
+    This function calculates new position and new velocity based on previous velocity, position, time step, damping coefficient
+    temperature.
+    :param time_step: time step from user imput (delta t)
+    :param velocity: previous velocity you calculated (can be initial velocity if it's a first step)
+    :param position: previous position you calculated (can be initial velocity if it's a first step)
+    :param damping_coef: damping coefficient from user input
+    :param temp: temperature from user input
+    :return:
+    '''
 
+    # call the functions drag_f and random_f to calculate new accerelation
     a = drag_f(damping_coef, velocity) + random_f(temp, damping_coef,K_B=1,epsi=1)
     new_velocity = velocity + a*time_step
     new_position = position + velocity * time_step
@@ -65,6 +76,11 @@ def euler(time_step,velocity,position, damping_coef, temp):
     return new_velocity, new_position
 
 def write_output(output):
+    '''
+
+    :param output:
+    :return:
+    '''
     header = "#Index    Time      Position      Velocity"
     Output = open('Output.txt', "w")
     Output.write(header)
@@ -114,13 +130,13 @@ def plot():
         t,p,Time=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
         time_took.append(t)
 
-        if  len(Time)>5:
-            plt.figure()
-            plt.xlabel('Time')
-            plt.ylabel('distance')
-            plt.plot(Time,p)
-            trj_path = os.path.join('trajectory.png')
-            plt.savefig(trj_path)
+        if len(Time)>5:
+           plt.figure()
+           plt.xlabel('Time')
+           plt.ylabel('distance')
+           plt.plot(Time,p)
+           trj_path = os.path.join('trajectory.png')
+           plt.savefig(trj_path)
 
     print(time_took)
     plt.figure()
@@ -130,7 +146,7 @@ def plot():
     hist_path = os.path.join('histogram.png')
     plt.savefig(hist_path)
 
-    #return trj_path,hist_path
+    return trj_path,hist_path
 
 
 def main():  # pragma: no cover

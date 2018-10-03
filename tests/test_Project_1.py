@@ -8,10 +8,8 @@ import pytest
 from click.testing import CliRunner
 
 from Project_1 import Project_1
-from Project_1 import cli
 import io
 import os
-import Lans
 import numpy as np
 import argparse
 import unittest

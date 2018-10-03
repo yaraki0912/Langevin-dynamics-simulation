@@ -36,7 +36,7 @@ class Test_Project_1(unittest.TestCase):
        #self.assertEqual(parse['damping_coefficient'], 0.1)
        self.parser = project_1.input()
        parsed = self.parser.parse_args(['--temperature', '300','--total_time', '1000','--time_step', '0.1','--initial_position', '0','--initial_velocity', '0','--damping_coefficient', '0.1'])
-       self.assertEqual([parsed.temperature,parsed.total_time, parsed.time_step, parsed.initial_position, parsed.initial_velocity,   parsed.damping_coeff], [300, 1000, 0.1, 0, 0, 0.1] )
+       self.assertEqual([parsed.temperature,parsed.total_time, parsed.time_step, parsed.initial_position, parsed.initial_velocity,   parsed.damping_coefficient], [300, 1000, 0.1, 0, 0, 0.1] )
  
         
         

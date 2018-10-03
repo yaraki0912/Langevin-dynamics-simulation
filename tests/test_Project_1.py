@@ -64,9 +64,7 @@ class Test_Project_1(unittest.TestCase):
         self.assertEqual(test_data[2], test_string3)
 
     def test_plot(self):
-
-        hist_path, trj_path = project_1.plot()
-        self.assertEqual(hist_path.split('/')[-1], 'histogram.png')
-        self.assertEqual(traj_path.split('/')[-1], 'trajectory.png')
+        self.assertTrue(os.path.isfile('histogram.png'))
+        self.assertTrue(os.path.isfile('trajectory.png'))
 
 

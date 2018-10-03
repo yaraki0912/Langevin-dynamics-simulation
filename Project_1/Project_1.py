@@ -7,8 +7,13 @@ import matplotlib.pyplot as plt
 import os
 
 def input():
-    #input parameters using argparse
-    parser = argparse.ArgumentParser(description='')
+    '''
+    This function reads parameter from user's input
+    :return:
+    parser that includes temperature, total time, time step, initial position, initial velocity, and damping coefficient
+    based on user's input from a command line
+    '''
+    parser = argparse.ArgumentParser(description='Please input emperature, total time, time step, initial position, initial velocity, and damping coefficient')
     parser.add_argument('--temperature', metavar='temperature', type=float, nargs=1,
                     help=' ')
     parser.add_argument('--total_time', metavar='total_time', type=float, nargs=1,
@@ -25,6 +30,16 @@ def input():
     return parser
 
 def random_f(temp, damping_coef,K_B=1,epsi=1):
+    '''
+    This function takes temperature and damping coefficient from user input and kb(default to 1), epsilon(default to 1)
+    and calculate random force
+
+    :param temp: tepmerature from user input
+    :param damping_coef: dumping coefficient from user input
+    :param K_B:boltzmann constant (reduced unit), defaulted as 1
+    :param epsi: delta(t-t') defaulted as 1
+    :return:random force
+    '''
     var = 2 * temp * damping_coef * K_B * epsi
     std = np.sqrt(var)  # standard deviation is sqrt of variance
     random_force=float(np.random.normal(0.0, std))
@@ -78,6 +93,7 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
 
 def plot():
     time_took = []
+    plt.rcParams.update({'figure.max_open_warning': 0})
     for j in range(100):
         i_position = 0
         i_velocity = 0
@@ -92,10 +108,10 @@ def plot():
         t,p,Time=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
         time_took.append(t)
 
-        if j == 1:
+        if  len(Time)>5:
             plt.figure()
             plt.xlabel('Time')
-            plt.ylabel('# of time took to hit wall')
+            plt.ylabel('distance')
             plt.plot(Time,p)
             trj_path = os.path.join('trajectory.png')
             plt.savefig(trj_path)
@@ -110,27 +126,6 @@ def plot():
 
     return trj_path,hist_path
 
-#def traj():
- ##  i_velocity = 0
-   # time_step = 0.1
-    #temp = 300
-    #wall = 5
-    #total_time = 1000
-    #damping_coef = 0.1
-    #n = int(total_time // time_step)
-    #new_position = i_position
-    #new_velocity = i_velocity
-    #time_took = []
-    #for i in range(n):
-    #    new_position, new_velocity = euler(time_step, new_velocity, new_position, damping_coef, temp)
-
-    #plt.figure()
-    #plt.xlabel('Time')
-    #plt.ylabel('# of time took to hit wall')
-    #plt.hist(time_took)
-    #trj_path = os.path.join('trajectory.png')
-    #plt.savefig(trj_path)
-   
 
 def main():  # pragma: no cover
     parser = input()
@@ -162,12 +157,10 @@ def main():  # pragma: no cover
         output.append([index, time, new_pos, new_vel])
         new_position = new_pos
         new_velocity = new_vel
-        #await asyncio.sleep(0.05)
         write_output(output)
         if new_position > wall or new_position < 0:
             break
     return None
-
 
 if __name__ == '__main__':
     input()

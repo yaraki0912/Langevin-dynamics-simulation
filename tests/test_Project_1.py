@@ -64,14 +64,8 @@ class Test_Project_1(unittest.TestCase):
         self.assertEqual(test_data[2], test_string3)
 
     def test_plot(self):
-        i_position=0
-        i_velocity=0
-        time_step =0.1
-        temp =100
-        wall=5
-        total_time=1
-        damping_coef=0.1
-        hist_path, traj_path = project_1.plot(i_position,i_velocity,time_step,temp,wall,total_time,damping_coef)
+
+        hist_path, traj_path = project_1.plot()
         self.assertEqual(hist_path.split('/')[-1], 'histogram.png')
         self.assertEqual(traj_path.split('/')[-1], 'trajectory.png')
 

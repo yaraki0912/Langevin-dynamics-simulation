@@ -6,13 +6,13 @@ import click
 
 
 @click.command()
-def main(args=None):
-    """Console script for Project_1."""
-    click.echo("Replace this message by putting your code into "
-               "Project_1.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
-    return 0
+#def main(args=None):
+ #   """Console script for Project_1."""
+  #  click.echo("Replace this message by putting your code into "
+   #            "Project_1.cli.main")
+    #click.echo("See click documentation at http://click.pocoo.org/")
+    #return 0
 
 
-if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+#if __name__ == "__main__":
+ #   sys.exit(main())  # pragma: no cover

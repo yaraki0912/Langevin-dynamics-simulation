@@ -86,6 +86,7 @@ def write_output(output):
     Output = open('Output.txt', "w")
     Output.write(header)
     Output.write("\n")
+    #except for the header, it writes index,time,position line by line
     for line in output:
         for i in range(len(line)):
             if (i == 0):
@@ -96,6 +97,17 @@ def write_output(output):
     Output.close()
 
 def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
+    '''
+    This function calculate time, position and time list the contains each time steps till the particle hits the wall
+    :param time_step: time step inout from user
+    :param new_velocity:
+    :param new_position:
+    :param damping_coef:
+    :param temp:
+    :param wall:
+    :param n:
+    :return:
+    '''
 
     time = 0
     position = []

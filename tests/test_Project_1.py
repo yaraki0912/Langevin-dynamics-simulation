@@ -5,6 +5,8 @@
 
 import pytest
 import matplotlib
+matplotlib.use('Agg')
+import matplotlib
 import matplotlib.pyplot as plt
 from click.testing import CliRunner
 import Project_1

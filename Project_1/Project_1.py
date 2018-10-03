@@ -6,8 +6,6 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
-
-
 def input():
     #input parameters using argparse
     parser = argparse.ArgumentParser(description='')
@@ -39,27 +37,14 @@ def drag_f(damping_coef,i_velocity):
     return drag_force
 
 def euler(time_step,velocity,position, damping_coef, temp):
-    #velocity = list()
-    #position = list()
-    #time = list()
-    #n = int(total_time // time_step)
 
-    #velocity.append(i_velocity)
-    #position.append(i_position)
-    #time.append(0.0)
-
-    #for i in range(n):
     a = drag_f(damping_coef, velocity) + random_f(temp, damping_coef,K_B=1,epsi=1)
-    new_velocity = velocity + a* time_step
+    new_velocity = velocity + a*time_step
     new_position = position + velocity * time_step
-
-
-        #t = time + time_step
-        #velocity.append(velocity_t)
-        #position.append(position_t)
-        #time.append(t)
-    #print("a,v,p=", a,new_velocity,new_position)
-    return a,new_velocity, new_position
+    #print(new_position)
+    #print("rf", random_f(temp, damping_coef,K_B=1,epsi=1)
+    #print("v,p=", new_velocity,new_position)
+    return new_velocity, new_position
 
 def write_output(output):
     #Write the output file containing index, time, position, and velocity of particles
@@ -77,17 +62,73 @@ def write_output(output):
         Output.write('\n')
     Output.close()
 
-#def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, time,wall):
+def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
+
+    time = 0
+    position = []
+    Time = []
+    position.append(new_position)
+    Time.append(time)
+    for i in range(n):
+        new_vel, new_pos = euler(time_step, new_velocity, new_position, damping_coef, temp, )
+        time += time_step
+        new_position = new_pos
+        new_velocity = new_vel
+        position.append(new_position)
+        Time.append(time)
+        if new_position > wall or new_position < -wall:
+            return time, position, Time
 
 
+#    new_vel, new_pos = euler(time_step, new_velocity, new_position, damping_coef, temp)
+#    #print("no hit", new_pos)
+#    if new_pos >= wall or new_pos <= -wall:
+#         #print("hit")
+#            return i+1
+#        else:
+#            return 'Null'
 
-        # await asyncio.sleep(0.05)
-        #write_output(output)
-
- #           return True
-  #      return False
 
 def histogram():
+    time_took = []
+
+    #
+    #    new_position,new_velocity=euler(time_step, new_velocity, new_position, damping_coef, temp)
+    for j in range(100):
+        i_position = 0
+        i_velocity = 0
+        time_step = 0.1
+        temp = 300
+        wall = 5
+        total_time = 1000
+        damping_coef = 0.1
+        n = int(total_time // time_step)
+        new_position = i_position
+        new_velocity = i_velocity
+        t,p,T=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
+        time_took.append(t)
+
+        if j == 1:
+            plt.figure()
+            plt.xlabel('Time')
+            plt.ylabel('# of time took to hit wall')
+            plt.plot(T,p)
+            hist_path = os.path.join('trajectory.png')
+            plt.savefig(hist_path)
+
+    plt.figure()
+    plt.xlabel('Time')
+    plt.ylabel('# of time took to hit wall')
+    plt.hist(time_took)
+    hist_path = os.path.join('histogram.png')
+    plt.savefig(hist_path)
+
+
+
+    print(time_took)
+    #return print(time_took, len(time_took))
+
+def traj():
     i_position = 0
     i_velocity = 0
     time_step = 0.1
@@ -98,39 +139,18 @@ def histogram():
     n = int(total_time // time_step)
     new_position = i_position
     new_velocity = i_velocity
-   # time = 0
-    num_took = list()
-    #put=[]
+    time_took = []
     for i in range(n):
-        if i !=0:
-            new_position = new_pos
-            new_velocity = new_vel
-        for j in range(0,100):
-            new_acc, new_vel, new_pos = euler(time_step, new_velocity, new_position, damping_coef, temp)
-            #time += time_step
-            # index += 1
-            # output.append([index, time, new_pos, new_vel])
-
-            if new_pos >= wall or new_pos <= -wall:
-                num_took.append(j+1)
-                break
-     #   write_output(put)
-
-    print(num_took, len(num_took))
-
-               #result = hit_wall(time_step, new_velocity, new_position, damping_coef, temp,n, time,wall)
-            #if result== True:
-
-             #   break
+        #time_took.append(hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall))
+        new_position, new_velocity = euler(time_step, new_velocity, new_position, damping_coef, temp)
 
     plt.figure()
     plt.xlabel('Time')
     plt.ylabel('# of time took to hit wall')
-    #plt.hist(hit_wall())
-    hist_path = os.path.join('histogram.png')
+    plt.hist(time_took)
+    hist_path = os.path.join('trajectory.png')
     plt.savefig(hist_path)
-
-
+    # return print(time_took, len(time_took))
 
 def main():  # pragma: no cover
     parser = input()
@@ -156,7 +176,7 @@ def main():  # pragma: no cover
 
     for i in range(n):
 
-        new_acc, new_vel, new_pos = euler(time_step,new_velocity,new_position, damping_coef, temp,)
+        new_vel, new_pos = euler(time_step,new_velocity,new_position, damping_coef, temp,)
         time += time_step
         index += 1
         output.append([index, time, new_pos, new_vel])
@@ -169,8 +189,8 @@ def main():  # pragma: no cover
     return None
 
 if __name__ == '__main__':
-    input()
-    main()
+    #input()
+    #main()
     histogram()
 
 """Main module."""

@@ -65,7 +65,7 @@ def euler(time_step,velocity,position,damping_coef,temp):
     :param position: previous position you calculated (can be initial velocity if it's a first step)
     :param damping_coef: damping coefficient from user input
     :param temp: temperature from user input
-    :return:
+    :return: new position and new velocity
     '''
 
     # call the functions drag_f and random_f to calculate new accerelation
@@ -78,8 +78,8 @@ def euler(time_step,velocity,position,damping_coef,temp):
 def write_output(output):
     '''
 
-    :param output:
-    :return:
+    :param output: it contains index, time, position at the time, velocity at the time
+    :return: output text file that
     '''
     header = "#Index    Time      Position      Velocity"
     Output = open('Output.txt', "w")
@@ -130,7 +130,7 @@ def plot():
         t,p,Time=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
         time_took.append(t)
 
-        if len(Time)>5:
+        if len(Time)>3:
            plt.figure()
            plt.xlabel('Time')
            plt.ylabel('distance')

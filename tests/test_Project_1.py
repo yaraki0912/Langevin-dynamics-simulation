@@ -43,8 +43,8 @@ class Test_Project_1(unittest.TestCase):
         '''Tests if the force, position and velocity calculated are correct'''
         self.assertEqual(project_1.euler(0,0,0,0,0), (0,0))
     
-    def test_main(self):
-        self.assertEqual(project_1.main(), None)
+   # def test_main(self):
+    #    self.assertEqual(project_1.main(), None)
 
    # def test_write_output(self):
     #    outfile = StringIO()

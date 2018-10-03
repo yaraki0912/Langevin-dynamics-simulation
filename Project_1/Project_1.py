@@ -76,16 +76,16 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
             return time, position,Time
 
 
-def histogram():
+def plt(i_position,i_velocity,time_step,temp,wall,total_time,damping_coef):
     time_took = []
     for j in range(100):
-        i_position = 0
-        i_velocity = 0
-        time_step = 0.1
-        temp = 300
-        wall = 5
-        total_time = 1000
-        damping_coef = 0.1
+        #i_position = 0
+        #i_velocity = 0
+        #time_step = 0.1
+        #temp = 300
+        #wall = 5
+        #total_time = 1000
+        #damping_coef = 0.1
         n = int(total_time // time_step)
         new_position = i_position
         new_velocity = i_velocity
@@ -166,10 +166,11 @@ def main():  # pragma: no cover
             break
     return None
 
+
 if __name__ == '__main__':
     input()
     main()
-    histogram()
+    plt()
 
 """Main module."""
 

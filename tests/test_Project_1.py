@@ -55,7 +55,6 @@ class Test_Project_1(unittest.TestCase):
         test_string = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
         test_string2 = '1 2.0000 3.0000 4.0000 \n'
         test_string3 = '5 6.0000 7.0000 8.0000 \n'
-        #out_file = './tests/test_output.txt'
         project_1.write_output(test_string)
         out_file='Output.txt'
         f = open(out_file, 'r')
@@ -63,5 +62,17 @@ class Test_Project_1(unittest.TestCase):
         f.close()
         self.assertEqual(test_data[1], test_string2)
         self.assertEqual(test_data[2], test_string3)
+
+    def test_plot_figures(self):
+        i_position=0
+        i_velocity=0
+        time_step =0
+        temp =0
+        wall=5
+        total_time=10
+        damping_coef=0
+        hist_path, traj_path = project_1.plot(i_position,i_velocity,time_step,temp,wall,total_time,damping_coef)
+        self.assertEqual(hist_path.split('/')[-1], 'histogram.png')
+        self.assertEqual(traj_path.split('/')[-1], 'trajectory.png')
 
 

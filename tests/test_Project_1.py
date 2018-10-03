@@ -66,10 +66,10 @@ class Test_Project_1(unittest.TestCase):
     def test_plot(self):
         i_position=0
         i_velocity=0
-        time_step =0
+        time_step =0.1
         temp =0
         wall=5
-        total_time=10
+        total_time=1
         damping_coef=0
         hist_path, traj_path = project_1.plot(i_position,i_velocity,time_step,temp,wall,total_time,damping_coef)
         self.assertEqual(hist_path.split('/')[-1], 'histogram.png')

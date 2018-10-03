@@ -18,6 +18,9 @@ Project_1
      :target: https://pyup.io/repos/github/yaraki0912/Project_1/
      :alt: Updates
 
+.. image:: https://coveralls.io/repos/github/yaraki0912/Project_1/badge.svg
+    :target: https://coveralls.io/github/yaraki0912/Project_1
+
 
 
 Project 1: Langevin equations

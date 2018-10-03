@@ -28,14 +28,11 @@ def random_f(temp, damping_coef,K_B=1,epsi=1):
     var = 2 * temp * damping_coef * K_B * epsi
     std = np.sqrt(var)  # standard deviation is sqrt of variance
     random_force=float(np.random.normal(0.0, std))
-    #print("rf", random_force)
     return random_force
 
 def drag_f(damping_coef,i_velocity):
-
-
+    
     drag_force = -damping_coef * i_velocity
-    #print("df",drag_force)
     return drag_force
 
 def euler(time_step,velocity,position, damping_coef, temp):
@@ -43,14 +40,10 @@ def euler(time_step,velocity,position, damping_coef, temp):
     a = drag_f(damping_coef, velocity) + random_f(temp, damping_coef,K_B=1,epsi=1)
     new_velocity = velocity + a*time_step
     new_position = position + velocity * time_step
-    #print(new_position)
-    #print("rf", random_f(temp, damping_coef,K_B=1,epsi=1)
-    #print("v,p=", new_velocity,new_position)
+    
     return new_velocity, new_position
 
 def write_output(output):
-    #Write the output file containing index, time, position, and velocity of particles
-    #assert((len(idx) == len(time)) == (len(position) == len(velocity)))
     header = "#Index    Time      Position      Velocity"
     Output = open('Output.txt', "w")
     Output.write(header)
@@ -84,9 +77,6 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
 
 def histogram():
     time_took = []
-
-    #
-    #    new_position,new_velocity=euler(time_step, new_velocity, new_position, damping_coef, temp)
     for j in range(100):
         i_position = 0
         i_velocity = 0
@@ -116,11 +106,6 @@ def histogram():
     hist_path = os.path.join('histogram.png')
     plt.savefig(hist_path)
 
-
-
-    print(time_took)
-    #return print(time_took, len(time_took))
-
 def traj():
     i_position = 0
     i_velocity = 0
@@ -134,7 +119,6 @@ def traj():
     new_velocity = i_velocity
     time_took = []
     for i in range(n):
-        #time_took.append(hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall))
         new_position, new_velocity = euler(time_step, new_velocity, new_position, damping_coef, temp)
 
     plt.figure()

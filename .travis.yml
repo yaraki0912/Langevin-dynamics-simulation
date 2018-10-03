@@ -21,7 +21,7 @@ install:
 
 # Command to run tests, e.g. python setup.py test
 script:
-- coverage run --source=Project_1 setup.py test
+- coverage run --source=Project_1/Project_1.py setup.py test
 - coverage report -m
 
 # Assuming you have installed the travis-ci CLI tool, after you

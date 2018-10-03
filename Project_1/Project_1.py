@@ -78,10 +78,11 @@ def euler(time_step,velocity,position,damping_coef,temp):
 def write_output(output):
     '''
 
-    :param output: it contains index, time, position at the time, velocity at the time
-    :return: output text file that conatins
+    :param output: List that contains index, time, position at the time, velocity at the time
+    :return: output text file that contains index, time, position at the time, velocity at the time till hit the wall
     '''
     header = "#Index    Time      Position      Velocity"
+    #make a text file called "Output"
     Output = open('Output.txt', "w")
     Output.write(header)
     Output.write("\n")

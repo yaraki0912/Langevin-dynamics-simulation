@@ -79,7 +79,7 @@ def write_output(output):
     '''
 
     :param output: it contains index, time, position at the time, velocity at the time
-    :return: output text file that
+    :return: output text file that conatins
     '''
     header = "#Index    Time      Position      Velocity"
     Output = open('Output.txt', "w")

@@ -14,7 +14,7 @@ import numpy as np
 import argparse
 import unittest
 import Project_1.Project_1 as project_1
-
+from io import StringIO
 class Test_Project_1(unittest.TestCase):
     
     def setUp(self):

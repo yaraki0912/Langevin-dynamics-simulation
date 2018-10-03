@@ -32,6 +32,8 @@ def random_f(temp, damping_coef,K_B=1,epsi=1):
     return random_force
 
 def drag_f(damping_coef,i_velocity):
+
+
     drag_force = -damping_coef * i_velocity
     #print("df",drag_force)
     return drag_force
@@ -78,15 +80,6 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
         Time.append(time)
         if new_position > wall or new_position < -wall:
             return time, position, Time
-
-
-#    new_vel, new_pos = euler(time_step, new_velocity, new_position, damping_coef, temp)
-#    #print("no hit", new_pos)
-#    if new_pos >= wall or new_pos <= -wall:
-#         #print("hit")
-#            return i+1
-#        else:
-#            return 'Null'
 
 
 def histogram():
@@ -189,8 +182,8 @@ def main():  # pragma: no cover
     return None
 
 if __name__ == '__main__':
-    #input()
-    #main()
+    input()
+    main()
     histogram()
 
 """Main module."""

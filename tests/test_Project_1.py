@@ -4,8 +4,8 @@
 """Tests for `Project_1` package."""
 
 import pytest
-#import matplotlib
-#import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.pyplot as plt
 from click.testing import CliRunner
 import Project_1
 from Project_1 import Project_1
@@ -63,7 +63,7 @@ class Test_Project_1(unittest.TestCase):
         self.assertEqual(test_data[1], test_string2)
         self.assertEqual(test_data[2], test_string3)
 
-    def test_plot_figures(self):
+    def test_plot(self):
         i_position=0
         i_velocity=0
         time_step =0

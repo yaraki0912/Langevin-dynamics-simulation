@@ -76,7 +76,7 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
             return time, position,Time
 
 
-def plt(i_position,i_velocity,time_step,temp,wall,total_time,damping_coef):
+def plot(i_position,i_velocity,time_step,temp,wall,total_time,damping_coef):
     time_took = []
     for j in range(100):
         #i_position = 0
@@ -170,7 +170,7 @@ def main():  # pragma: no cover
 if __name__ == '__main__':
     input()
     main()
-    plt()
+    plot(0,0, 0.1, 300,5, 1000,0.1)
 
 """Main module."""
 

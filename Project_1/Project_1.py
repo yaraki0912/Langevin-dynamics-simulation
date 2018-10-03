@@ -71,7 +71,7 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
         new_velocity = new_vel
         position.append(new_position)
         Time.append(time)
-        if new_position > wall or new_position < -wall:
+        if new_position > wall or new_position < 0:
             return time, position, Time
 
 
@@ -127,7 +127,7 @@ def traj():
     plt.hist(time_took)
     hist_path = os.path.join('trajectory.png')
     plt.savefig(hist_path)
-    # return print(time_took, len(time_took))
+   
 
 def main():  # pragma: no cover
     parser = input()
@@ -161,7 +161,7 @@ def main():  # pragma: no cover
         new_velocity = new_vel
         #await asyncio.sleep(0.05)
         write_output(output)
-        if new_position > wall or new_position < -wall:
+        if new_position > wall or new_position < 0:
             break
     return None
 

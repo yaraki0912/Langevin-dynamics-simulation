@@ -28,7 +28,7 @@ class Test_Project_1(unittest.TestCase):
        
        self.parser = project_1.input()
        parsed = self.parser.parse_args(['--temperature', '300.0','--total_time', '1000.0','--time_step', '0.1','--initial_position', '0.0','--initial_velocity', '0.0','--damping_coefficient', '0.1'])
-       self.assertEqual([parsed.temperature,parsed.total_time, parsed.time_step, parsed.initial_position, parsed.initial_velocity,   parsed.damping_coefficient], [300.0, 1000.0, 0.1, 0.0, 0.0, 0.1] )
+       self.assertEqual([parsed.temperature,parsed.total_time, parsed.time_step, parsed.initial_position, parsed.initial_velocity,   parsed.damping_coefficient], [[300.0], [1000.0], [0.1], [0.0], [0.0], [0.1]] )
  
         
         
@@ -45,9 +45,9 @@ class Test_Project_1(unittest.TestCase):
 
     def test_write_output(self):
         outfile = StringIO()
-        project_1.output_file([0.0,0.0,0.0,0.0], outfile)
+        project_1.output([0.0,0.0,0.0,0.0])
         outfile.seek(0)
         content = outfile.read()
         output_list = content.split('\n')
-        self.assertEqual(line, '{0} {1:.2f} {2:.6f} {3:.6f}'.format(0.0,0.0,0.0,0.0))
+        self.assertEqual(project_1.output([0.0,0.0,0.0,0.0]),output_list))
             

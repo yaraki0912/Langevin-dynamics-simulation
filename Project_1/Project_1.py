@@ -28,14 +28,11 @@ def random_f(temp, damping_coef,K_B=1,epsi=1):
     var = 2 * temp * damping_coef * K_B * epsi
     std = np.sqrt(var)  # standard deviation is sqrt of variance
     random_force=float(np.random.normal(0.0, std))
-    #print("rf", random_force)
     return random_force
 
 def drag_f(damping_coef,i_velocity):
-
-
+    
     drag_force = -damping_coef * i_velocity
-    #print("df",drag_force)
     return drag_force
 
 def euler(time_step,velocity,position, damping_coef, temp):
@@ -47,8 +44,6 @@ def euler(time_step,velocity,position, damping_coef, temp):
     return new_velocity, new_position
 
 def write_output(output):
-    #Write the output file containing index, time, position, and velocity of particles
-    #assert((len(idx) == len(time)) == (len(position) == len(velocity)))
     header = "#Index    Time      Position      Velocity"
     Output = open('Output.txt', "w")
     Output.write(header)
@@ -77,14 +72,12 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
         position.append(new_position)
         Time.append(time)
         if new_position > wall or new_position < 0:
-            return time, position, Time
+
+            return time, position,Time
 
 
 def histogram():
     time_took = []
-
-    #
-    #    new_position,new_velocity=euler(time_step, new_velocity, new_position, damping_coef, temp)
     for j in range(100):
         i_position = 0
         i_velocity = 0
@@ -96,17 +89,18 @@ def histogram():
         n = int(total_time // time_step)
         new_position = i_position
         new_velocity = i_velocity
-        t,p,T=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
+        t,p,Time=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
         time_took.append(t)
 
         if j == 1:
             plt.figure()
             plt.xlabel('Time')
             plt.ylabel('# of time took to hit wall')
-            plt.plot(T,p)
-            hist_path = os.path.join('trajectory.png')
-            plt.savefig(hist_path)
+            plt.plot(Time,p)
+            trj_path = os.path.join('trajectory.png')
+            plt.savefig(trj_path)
 
+    print(time_took)
     plt.figure()
     plt.xlabel('Time')
     plt.ylabel('# of time took to hit wall')
@@ -114,34 +108,27 @@ def histogram():
     hist_path = os.path.join('histogram.png')
     plt.savefig(hist_path)
 
+#def traj():
+ ##  i_velocity = 0
+   # time_step = 0.1
+    #temp = 300
+    #wall = 5
+    #total_time = 1000
+    #damping_coef = 0.1
+    #n = int(total_time // time_step)
+    #new_position = i_position
+    #new_velocity = i_velocity
+    #time_took = []
+    #for i in range(n):
+    #    new_position, new_velocity = euler(time_step, new_velocity, new_position, damping_coef, temp)
 
-
-    print(time_took)
-    #return print(time_took, len(time_took))
-
-def traj():
-    i_position = 0
-    i_velocity = 0
-    time_step = 0.1
-    temp = 300
-    wall = 5
-    total_time = 1000
-    damping_coef = 0.1
-    n = int(total_time // time_step)
-    new_position = i_position
-    new_velocity = i_velocity
-    time_took = []
-    for i in range(n):
-        #time_took.append(hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall))
-        new_position, new_velocity = euler(time_step, new_velocity, new_position, damping_coef, temp)
-
-    plt.figure()
-    plt.xlabel('Time')
-    plt.ylabel('# of time took to hit wall')
-    plt.hist(time_took)
-    hist_path = os.path.join('trajectory.png')
-    plt.savefig(hist_path)
-    # return print(time_took, len(time_took))
+    #plt.figure()
+    #plt.xlabel('Time')
+    #plt.ylabel('# of time took to hit wall')
+    #plt.hist(time_took)
+    #trj_path = os.path.join('trajectory.png')
+    #plt.savefig(trj_path)
+   
 
 def main():  # pragma: no cover
     parser = input()
@@ -175,7 +162,7 @@ def main():  # pragma: no cover
         new_velocity = new_vel
         #await asyncio.sleep(0.05)
         write_output(output)
-        if new_position > wall or new_position < -wall:
+        if new_position > wall or new_position < 0:
             break
     return None
 

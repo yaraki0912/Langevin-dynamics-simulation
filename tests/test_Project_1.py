@@ -46,7 +46,7 @@ class Test_Project_1(unittest.TestCase):
         
       
     def test_hit_wall(self):
-        self.assertEqual(project_1.hit_wall(0,0,0,0,0,0,0),(None))
+        self.assertEqual(project_1.hit_wall(200,1,1,1,1,1,1),(200, [1, 201], [0, 200]))
     
    # def test_main(self):
     #    self.assertEqual(project_1.main(), None)

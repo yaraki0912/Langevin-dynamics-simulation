@@ -57,6 +57,7 @@ class Test_Project_1(unittest.TestCase):
         test_string3 = '5 6.0000 7.0000 8.0000 \n'
         #out_file = './tests/test_output.txt'
         project_1.write_output(test_string)
+        out_file='Output.txt'
         f = open(out_file, 'r')
         test_data = list(f.readlines())
         f.close()

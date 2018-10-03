@@ -31,11 +31,11 @@ def input():
 
 def random_f(temp, damping_coef,K_B=1,epsi=1):
     '''
-    This function takes temperature and damping coefficient from user input and kb(default to 1), epsilon(default to 1)
+    This function takes temperature and damping coefficient and kb(default to 1), epsilon(default to 1)
     and calculate random force
 
-    :param temp: tepmerature from user input
-    :param damping_coef: dumping coefficient from user input
+    :param temp: temperature
+    :param damping_coef: dumping coefficient
     :param K_B:boltzmann constant (reduced unit), defaulted as 1
     :param epsi: delta(t-t') defaulted as 1
     :return:random force
@@ -46,6 +46,12 @@ def random_f(temp, damping_coef,K_B=1,epsi=1):
     return random_force
 
 def drag_f(damping_coef,i_velocity):
+    '''
+    This function takes damping coefficient and velocity
+    :param damping_coef: damping coefficient from user input
+    :param i_velocity: velocity at time t
+    :return: drag force
+    '''
     
     drag_force = -damping_coef * i_velocity
     return drag_force
@@ -124,7 +130,7 @@ def plot():
     hist_path = os.path.join('histogram.png')
     plt.savefig(hist_path)
 
-    return trj_path,hist_path
+    #return trj_path,hist_path
 
 
 def main():  # pragma: no cover

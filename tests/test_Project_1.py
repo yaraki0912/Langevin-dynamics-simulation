@@ -51,11 +51,16 @@ class Test_Project_1(unittest.TestCase):
    # def test_main(self):
     #    self.assertEqual(project_1.main(), None)
 
-   # def test_write_output(self):
-    #    outfile = StringIO()
-     #   project_1.write_output([0.0,0.0,0.0,0.0])
-      #  outfile.seek(0)
-       # content = outfile.read()
-        #output_list = content.split('\n')
-        #self.assertEqual(project_1.write_output([0.0,0.0,0.0,0.0]),output_list)
-            
+    def test_write_output(self):
+        test_string = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
+        test_string2 = '1 2.0000 3.0000 4.0000 \n'
+        test_string3 = '5 6.0000 7.0000 8.0000 \n'
+        #out_file = './tests/test_output.txt'
+        project_1.write_output(test_string)
+        f = open(out_file, 'r')
+        test_data = list(f.readlines())
+        f.close()
+        self.assertEqual(test_data[1], test_string2)
+        self.assertEqual(test_data[2], test_string3)
+
+

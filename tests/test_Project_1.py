@@ -45,9 +45,9 @@ class Test_Project_1(unittest.TestCase):
 
     def test_write_output(self):
         outfile = StringIO()
-        project_1.output([0.0,0.0,0.0,0.0])
+        project_1.write_output([0.0,0.0,0.0,0.0])
         outfile.seek(0)
         content = outfile.read()
         output_list = content.split('\n')
-        self.assertEqual(project_1.output([0.0,0.0,0.0,0.0]),output_list)
+        self.assertEqual(project_1.write_output([0.0,0.0,0.0,0.0]),output_list)
             

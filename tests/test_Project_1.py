@@ -6,14 +6,16 @@
 import pytest
 import matplotlib
 matplotlib.use('Agg')
-import unittest
+import matplotlib
 import matplotlib.pyplot as plt
+from click.testing import CliRunner
 import Project_1
 from Project_1 import Project_1
 import io
 import os
 import numpy as np
 import argparse
+import unittest
 import Project_1.Project_1 as project_1
 from io import StringIO
 

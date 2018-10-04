@@ -24,17 +24,19 @@ CHE 477 Langevin Dynamics Project
 
 
 
-Project 1: Langevin equations
-
 
 * Free software: MIT license
 * Documentation: https://Project-1.readthedocs.io.
 
 
-Features
+Overview
 --------
 
-* TODO
+Installation 
+------------
+
+How to Use
+--------
 
 Credits
 -------

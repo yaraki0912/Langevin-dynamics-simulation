@@ -15,17 +15,17 @@ def input():
     '''
     parser = argparse.ArgumentParser(description='Please input emperature, total time, time step, initial position, initial velocity, and damping coefficient')
     parser.add_argument('--temperature', metavar='temperature', type=float, nargs=1,
-                    help=' ')
+                    help='Please input temperature after --temperature ')
     parser.add_argument('--total_time', metavar='total_time', type=float, nargs=1,
-                    help=' ')
+                    help='please input tital time after --total_time ')
     parser.add_argument('--time_step', metavar='time_step', type=float, nargs=1,
-                    help=' ')
+                    help='please input time step after --time_step ')
     parser.add_argument('--initial_position', metavar='initial_position', type=float, nargs=1,
-                    help=' ')
+                    help='Please input initial position of the particle after --initial_position ')
     parser.add_argument('--initial_velocity', metavar='initial_velocity', type=float, nargs=1,
-                    help=' ')
+                    help='Please input initial velocity of the particle after --initial_velocity ')
     parser.add_argument('--damping_coefficient', metavar='damping_coefficient', type=float, nargs=1,
-                    help=' ')
+                    help='Please input damping coefficient after --damping_coefficient ')
 
     return parser
 

@@ -1,5 +1,5 @@
 =========
-Project_1
+CHE 477 Langevin Dynamics Project
 =========
 
 

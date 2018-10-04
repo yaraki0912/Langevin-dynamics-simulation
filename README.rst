@@ -31,12 +31,25 @@ CHE 477 Langevin Dynamics Project
 
 Overview
 --------
+This is one dimensional python implementaion Langevin Dynamics Simulation. It utilizes Euler integration and calculates position and velocity of a particle based on the  initial position, velocity, temperature, damping coefficient, time step and total time users input. 
 
 Installation 
 ------------
+To install this project, use following command in your terminal
+
+git clone git@github.com:yaraki0912/Project_1.git
+pip install Project_1
 
 How to Use
 --------
+This simulator has a command line interface where the user can input parameters using the command libe bellow (values are arbitrary).
+
+py Project_1/Project_1.py --temperature 300 --total_time 1000  --time_step 0.1 --initial_position 0 --initial_velocity 0 --damping_coefficient 0.1
+
+Outputs are textfile, histogram, and trajectory.
+Result is in the form of a text file which contains position and velocity for each time step.
+histogram.png plots how many times the particle hits the wall at the time out of 100 runs with a given condition. 
+trajectory.png plots a path of the particle untill it hits the wall. The graph represents one of the 100 runs performed above.
 
 Credits
 -------

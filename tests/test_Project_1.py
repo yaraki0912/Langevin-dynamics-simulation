@@ -59,7 +59,7 @@ class Test_Project_1(unittest.TestCase):
         test = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
         test_value1 = '1 2.0000 3.0000 4.0000 \n'
         test_value2 = '5 6.0000 7.0000 8.0000 \n'
-        project_1.write_output(test_string)
+        project_1.write_output(test)
         out='Output.txt'
         f = open(out, 'r')
         test_data = list(f.readlines())

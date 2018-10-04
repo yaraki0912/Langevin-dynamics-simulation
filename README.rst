@@ -38,6 +38,7 @@ Installation
 To install this project, use following command in your terminal
 
 git clone git@github.com:yaraki0912/Project_1.git
+
 pip install Project_1
 
 How to Use

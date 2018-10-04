@@ -77,7 +77,7 @@ def euler(time_step,velocity,position,damping_coef,temp):
 
 def write_output(output):
     '''
-
+    This function creates a text file that contains the result which answers the second requirement
     :param output: List that contains index, time, position at the time, velocity at the time
     :return: output text file that contains index, time, position at the time, velocity at the time till hit the wall
     '''
@@ -100,20 +100,22 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
     '''
     This function calculate time, position and time list the contains each time steps till the particle hits the wall
     :param time_step: time step inout from user
-    :param new_velocity:
-    :param new_position:
-    :param damping_coef:
-    :param temp:
-    :param wall:
-    :param n:
-    :return:
+    :param new_velocity: initial velocity when you generate this function
+    :param new_position: initial position when youo generate this function
+    :param damping_coef: damping coefficient from user input
+    :param temp: temperature input from user
+    :param wall: wall size that is defaulted as 5 in this project
+    :param n: total time divided by time step
+    :return: time, position and time list the contains each time steps till the particle hits the wall
     '''
 
     time = 0
+    #position and Time saves all the position and time untill the particle hits the wall.They are used to make trajectory
     position = []
     Time = []
     position.append(new_position)
     Time.append(time)
+    #keep caluculating new velocity and position untill the particle hits the wall or till time is up
     for i in range(n):
         new_vel, new_pos = euler(time_step, new_velocity, new_position, damping_coef, temp, )
         time += time_step
@@ -127,8 +129,16 @@ def hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n):
 
 
 def plot():
+    '''
+    This function generates histogram and trajectory based on the hit_wall function
+    The histogram shows how long the particle took to hit the wall in every 100 runs
+    The trajectory takes one of the 100 runs and shows the path it took till hitting the wall
+    :return: histogram and trajectory
+    '''
+
     time_took = []
     plt.rcParams.update({'figure.max_open_warning': 0})
+    # the for loop runs hit_wall for 100 times to collect data for the histogram with given condition i the prompt
     for j in range(100):
         i_position = 0
         i_velocity = 0
@@ -140,21 +150,25 @@ def plot():
         n = int(total_time // time_step)
         new_position = i_position
         new_velocity = i_velocity
+        #t is the time the particle hits the wall, p/Time  contains all the path/time the particle took till it hits the wall
         t,p,Time=hit_wall(time_step, new_velocity, new_position, damping_coef, temp, wall,n)
+        #collect the time the partcle hits the wall to make a histogram
         time_took.append(t)
-
+        #this if statement privents making a tajectory that only contains two points where the partcle goes to the negative
+        #direction and hits the wall immediently. It is not a wrong data but graph looks too funky.
         if len(Time)>3:
            plt.figure()
            plt.xlabel('Time')
-           plt.ylabel('distance')
+           plt.ylabel('Distance')
+           #time vs position graph from one of the
            plt.plot(Time,p)
            trj_path = os.path.join('trajectory.png')
            plt.savefig(trj_path)
 
-    print(time_took)
+    #make a histohram of time it took to hit the walls
     plt.figure()
     plt.xlabel('Time')
-    plt.ylabel('# of time took to hit wall')
+    plt.ylabel('# of runs that hits at the time')
     plt.hist(time_took)
     hist_path = os.path.join('histogram.png')
     plt.savefig(hist_path)
@@ -163,6 +177,7 @@ def plot():
 
 
 def main():  # pragma: no cover
+    #generates initial values based on the user input using parser
     parser = input()
     args = parser.parse_args()
     temp = args.temperature[0]
@@ -171,11 +186,8 @@ def main():  # pragma: no cover
     i_position = args.initial_position[0]
     i_velocity = args.initial_velocity[0]
     damping_coef = args.damping_coefficient[0]
+    #wall size is default
     wall=5
-
-    if (damping_coef <= 0 or temp <= 0 or time_step <= 0 or total_time <= 0):
-        # damping coefficient, temperature and time must be positive
-        raise ValueError("Damping coefficient, temperature, time_step and total_time must be non-zero positive values")
 
     n = int(total_time // time_step)
     new_position = i_position
@@ -184,6 +196,7 @@ def main():  # pragma: no cover
     index=0
     output=[]
 
+    #run euler till time is up or hit the wall
     for i in range(n):
 
         new_vel, new_pos = euler(time_step,new_velocity,new_position, damping_coef, temp,)
